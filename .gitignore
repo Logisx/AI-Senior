@@ -93,3 +93,6 @@ target/
 
 # Environments
 .env
+
+# Logging
+logs/
