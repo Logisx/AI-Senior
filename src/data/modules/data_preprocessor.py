@@ -1,0 +1,81 @@
+import os
+import hashlib
+from typing import Optional, List
+from pydantic import BaseModel
+from unstructured.cleaners.core import clean, replace_unicode_quotes, clean_non_ascii_chars
+from unstructured.staging.huggingface import chunk_by_attention_window
+
+from src.utils.logging import logger
+from config.paths import DATA_PROCESSED_DIR
+from src.utils.file_management import FileManagement
+from src.utils.configuration_management import ConfigurationManagement
+
+
+class Document(BaseModel):
+    id: str
+    group_key: Optional[str] = None
+    metadata: Optional[dict] = {}
+    text: Optional[list] = []
+    chunks: Optional[list] = []
+    embeddings: Optional[list] = []
+
+class DataPreprocessor:
+    def __init__(self):
+        self.__params = ConfigurationManagement.get_data_transformation_params()
+        self.__news_data = FileManagement.read_from_json(self.__params.news_filepath)
+
+    def run(self) -> List[Document]:
+        documents_list = []
+        for article_data in self.__news_data:
+            result = self.__process_article_data(article_data=article_data)
+            documents_list.append(result)
+
+        documents_filepath = os.path.join(DATA_PROCESSED_DIR, f"documents_{self.__params.collection_name}.json")
+        FileManagement.save_to_json({'documents': documents_list}, documents_filepath)
+        return documents_filepath
+    
+    def __process_article_data(self, article_data: dict) -> Document:
+        document = self.__parse_document(article_data)
+        document = self.__chunk_document(document)
+        document = self.__embed_document(document)
+        return document
+
+    def __parse_document(self, article_data: dict) -> Document:
+        document_id = hashlib.md5(article_data['description'].encode()).hexdigest()
+        document = Document(id = document_id)
+
+        article_data['title'] = clean_non_ascii_chars(replace_unicode_quotes(clean(article_data['title'])))
+        article_data['description'] = clean_non_ascii_chars(replace_unicode_quotes(clean(article_data['description'])))
+        article_data['content'] = clean_non_ascii_chars(replace_unicode_quotes(clean(article_data['content'])))
+
+        document.text = [article_data['title'], article_data['description'], article_data['content']]
+        document.metadata['author'] = article_data['author']
+        document.metadata['title'] = article_data['title']
+        document.metadata['url'] = article_data['url']
+        document.metadata['date'] = article_data['publishedAt']
+
+        return document
+    
+    def __chunk_document(self, document: Document) -> Document:
+        chunks = []
+        for text in document.text:
+            chunks += chunk_by_attention_window(text, 
+                            self.__params.tokenizer,
+                            max_input_size=self.__params.vector_size)
+            
+        document.chunks = chunks
+        return document
+    
+    def __embed_document(self, document: Document) -> Document:
+        for chunk in document.text:
+            inputs = self.__params.tokenizer(chunk,
+                            padding=True,
+                            truncation=True,
+                            return_tensors="pt",
+                            max_length=self.__params.vector_size)
+        
+            result = self.__params.model(**inputs)
+            embeddings = result.last_hidden_state[:, 0, :].cpu().detach().numpy()
+            lst = embeddings.flatten().tolist()
+            document.embeddings.append(lst)
+        return document

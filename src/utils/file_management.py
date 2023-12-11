@@ -24,8 +24,24 @@ class FileManagement():
             None
         """
         with open(file_path, 'w') as file:
-            json.dump(data, file)
+            json.dump(data, file, indent=4)
         logger.info(f"Data saved to {file_path}")
+    
+    @staticmethod
+    def read_from_json(file_path):
+        """
+        Read data from a JSON file.
+
+        Args:
+            file_path: The path of the JSON file.
+
+        Returns:
+            data: The data read from the JSON file.
+        """
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        logger.info(f"Data read from {file_path}")
+        return data
     
     @staticmethod
     def read_yaml(path_to_yaml: Path) -> ConfigBox:
