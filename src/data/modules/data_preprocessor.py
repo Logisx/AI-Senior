@@ -2,6 +2,8 @@ import os
 import hashlib
 from typing import Optional, List
 from pydantic import BaseModel
+from tqdm import tqdm
+from pathlib import Path
 from unstructured.cleaners.core import clean, replace_unicode_quotes, clean_non_ascii_chars
 from unstructured.staging.huggingface import chunk_by_attention_window
 
@@ -22,16 +24,17 @@ class Document(BaseModel):
 class DataPreprocessor:
     def __init__(self):
         self.__params = ConfigurationManagement.get_data_transformation_params()
-        self.__news_data = FileManagement.read_from_json(self.__params.news_filepath)
+        self.__news_data = FileManagement.read_json(self.__params.news_filepath)
 
-    def run(self) -> List[Document]:
+    def run(self) -> Path:
+        logger.info("Processing news data")
         documents_list = []
-        for article_data in self.__news_data:
+        for article_data in tqdm(self.__news_data):
             result = self.__process_article_data(article_data=article_data)
             documents_list.append(result)
-
-        documents_filepath = os.path.join(DATA_PROCESSED_DIR, f"documents_{self.__params.collection_name}.json")
-        FileManagement.save_to_json({'documents': documents_list}, documents_filepath)
+        logger.info("Saving documents to json")
+        documents_filepath = Path(os.path.join(DATA_PROCESSED_DIR, f"documents_{self.__params.collection_name}.json"))
+        self.__save_documents_to_json(documents_list, documents_filepath)
         return documents_filepath
     
     def __process_article_data(self, article_data: dict) -> Document:
@@ -79,3 +82,15 @@ class DataPreprocessor:
             lst = embeddings.flatten().tolist()
             document.embeddings.append(lst)
         return document
+    
+    def __save_documents_to_json(self, documents_list: List[Document], file_path: Path) -> None:
+        documents_data = [
+            {
+                "id": document.id,
+                "metadata": document.metadata,
+                "text": document.text,
+                "chunks": document.chunks,
+                "embeddings": document.embeddings
+            } for document in documents_list
+        ]
+        FileManagement.save_to_json(documents_data, file_path)

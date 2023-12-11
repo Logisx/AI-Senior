@@ -87,8 +87,8 @@ class ConfigurationManagement:
         qdrant_params = ConfigurationManagement.__read_data_params().qdrant
 
         data_transformation_params = DataTransformationParams(
-            tokenizer=AutoTokenizer.from_pretrained(model_params.name),
-            model=AutoModel.from_pretrained(model_params.name),
+            tokenizer=AutoTokenizer.from_pretrained(model_params.base_model_name),
+            model=AutoModel.from_pretrained(model_params.base_model_name),
             vector_size=qdrant_params.vector_size,
             collection_name=qdrant_params.collection_name,
             news_filepath=data_params.news_filepath

@@ -33,7 +33,7 @@ class QdrantDataUploader:
         self.__init_qdrant()
         logger.info("Reading documents from json")
         documents_filepath = os.path.join(DATA_PROCESSED_DIR, f"documents_{self.__params.collection_name}.json")
-        documents_list = FileManagement.read_from_json(documents_filepath).documents
+        documents_list = FileManagement.read_json(documents_filepath).documents
         logger.info("Uploading documents to Qdrant")
         for document in tqdm(documents_list):
             self.__push_document_to_qdrant(document)

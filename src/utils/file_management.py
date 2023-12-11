@@ -28,7 +28,7 @@ class FileManagement():
         logger.info(f"Data saved to {file_path}")
     
     @staticmethod
-    def read_from_json(file_path):
+    def read_json(file_path):
         """
         Read data from a JSON file.
 
