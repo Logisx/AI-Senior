@@ -8,14 +8,13 @@ from unstructured.cleaners.core import clean, replace_unicode_quotes, clean_non_
 from unstructured.staging.huggingface import chunk_by_attention_window
 
 from src.utils.logging import logger
-from config.paths import DATA_PROCESSED_DIR
+from config.paths import DATA_RAW_DIR, DATA_PROCESSED_DIR
 from src.utils.file_management import FileManagement
 from src.utils.configuration_management import ConfigurationManagement
 
 
 class Document(BaseModel):
     id: str
-    group_key: Optional[str] = None
     metadata: Optional[dict] = {}
     text: Optional[list] = []
     chunks: Optional[list] = []
@@ -24,7 +23,7 @@ class Document(BaseModel):
 class DataPreprocessor:
     def __init__(self):
         self.__params = ConfigurationManagement.get_data_transformation_params()
-        self.__news_data = FileManagement.read_json(self.__params.news_filepath)
+        self.__news_data = FileManagement.read_json(Path(os.path.join(DATA_RAW_DIR, self.__params.news_data_filename)))
 
     def run(self) -> Path:
         logger.info("Processing news data")

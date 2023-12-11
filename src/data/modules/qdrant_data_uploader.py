@@ -12,16 +12,7 @@ from src.utils.logging import logger
 from config.paths import DATA_PROCESSED_DIR
 from src.utils.file_management import FileManagement
 from src.utils.configuration_management import ConfigurationManagement
-
-
-
-class Document(BaseModel):
-    id: str
-    group_key: Optional[str] = None
-    metadata: Optional[dict] = {}
-    text: Optional[list] = []
-    chunks: Optional[list] = []
-    embeddings: Optional[list] = []
+from src.data.modules.data_preprocessor import Document
 
 class QdrantDataUploader:
     def __init__(self):
@@ -33,7 +24,11 @@ class QdrantDataUploader:
         self.__init_qdrant()
         logger.info("Reading documents from json")
         documents_filepath = os.path.join(DATA_PROCESSED_DIR, f"documents_{self.__params.collection_name}.json")
-        documents_list = FileManagement.read_json(documents_filepath).documents
+        documents_data = FileManagement.read_json(documents_filepath)
+
+        logger.info("Form documents from data")
+        documents_list = [Document(**document) for document in documents_data]
+
         logger.info("Uploading documents to Qdrant")
         for document in tqdm(documents_list):
             self.__push_document_to_qdrant(document)
@@ -46,15 +41,14 @@ class QdrantDataUploader:
     def __init_qdrant_client(self) -> None:
         self.__qdrant_client = QdrantClient(
             url=self.__url,
-            api_key=self.__api_key
-        )
+            api_key=self.__api_key)
     
     def __init_collection(self) -> None:
         try:
             self.__qdrant_client.get_collection(collection_name=self.__params.collection_name)
         except (UnexpectedResponse, ValueError):
             self.__qdrant_client.recreate_collection(
-                collection_name=self,
+                collection_name=self.__params.collection_name,
                 vectors_config=VectorParams(
                     size=self.__params.vector_size,
                     distance=Distance.COSINE

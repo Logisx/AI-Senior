@@ -1,9 +1,9 @@
 qdrant:
-  collection_name: newsapi_news 
+  collection_name: newsapi_news
   vector_size: 384
 
 data_transformation:
-  news_filepath: data/raw/newsapi_news_2023-11-03_to_2023-12-10.json
+  news_data_filename: newsapi_news_2023-11-03_to_2023-12-10.json
 
 newsapi_request:
   language: en
@@ -12,7 +12,7 @@ newsapi_request:
   page: 1
 
 news_download:
-  num_requests: 200
+  num_requests: 150
   from_date: 2023-11-04
   to_date: 2023-12-11
   queries_list: [

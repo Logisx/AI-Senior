@@ -30,7 +30,7 @@ class DataTransformationParams:
     model: AutoModel
     vector_size: int
     collection_name: str
-    news_filepath: Path
+    news_data_filename: Path
 
 @dataclass
 class QdrantUploadParams:
@@ -38,7 +38,6 @@ class QdrantUploadParams:
     vector_size: int
 
 class ConfigurationManagement:
-
     @staticmethod
     def get_newsapi_api_key() -> str:
         _ = load_dotenv(find_dotenv())
@@ -91,7 +90,7 @@ class ConfigurationManagement:
             model=AutoModel.from_pretrained(model_params.base_model_name),
             vector_size=qdrant_params.vector_size,
             collection_name=qdrant_params.collection_name,
-            news_filepath=data_params.news_filepath
+            news_data_filename=data_params.news_data_filename
         )
 
         return data_transformation_params
