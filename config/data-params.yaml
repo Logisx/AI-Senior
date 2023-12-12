@@ -5,6 +5,22 @@ qdrant:
 data_transformation:
   news_data_filename: newsapi_news_2023-11-03_to_2023-12-10.json
 
+training_data_generation:
+  examples_filename: training_examples.json
+  engine: text-davinci-003
+  temperature: 0
+  max_tokens: 100
+  prompt_template: |
+    You are an expert in the IT development and edge technologies. I will give you some information about myself and you will provide me with a development advice.
+
+    # ABOUT ME
+    {ABOUT_ME}
+
+    # CONTEXT
+    {CONTEXT}
+
+    Please provide concrete advice in less than 100 tokens, and justify your answer based on the news provided in the context.
+
 newsapi_request:
   language: en
   sort_by: publishedAt

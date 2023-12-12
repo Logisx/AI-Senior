@@ -37,6 +37,15 @@ class QdrantUploadParams:
     collection_name: str
     vector_size: int
 
+@dataclass
+class TrainingDataGenerationParams:
+    examples_filename: Path
+    engine: str
+    temperature: float
+    max_tokens: int
+    prompt_template: str
+
+
 class ConfigurationManagement:
     @staticmethod
     def get_newsapi_api_key() -> str:
@@ -52,6 +61,11 @@ class ConfigurationManagement:
     def get_qdrant_api_url() -> str:
         _ = load_dotenv(find_dotenv())
         return os.environ["QDRANT_API_URL"]
+    
+    @staticmethod
+    def get_openai_api_key() -> str:
+        _ = load_dotenv(find_dotenv())
+        return os.environ["OPENAI_API_KEY"]
 
     @staticmethod 
     def get_newsapi_request_params() -> NewsApiRequestParams:
@@ -105,6 +119,20 @@ class ConfigurationManagement:
         )
 
         return qdrant_upload_params     
+    
+    @staticmethod
+    def get_training_data_generation_params() -> ConfigBox:
+        params = ConfigurationManagement.__read_data_params().training_data_generation
+        
+        training_data_generation_params = TrainingDataGenerationParams(
+            examples_filename=params.examples_filename,
+            engine=params.engine,
+            temperature=params.temperature,
+            max_tokens=params.max_tokens,
+            prompt_template=params.prompt_template
+        )
+
+        return training_data_generation_params
 
     @staticmethod
     def __read_data_params() -> ConfigBox:
