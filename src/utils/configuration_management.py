@@ -5,9 +5,9 @@ from typing import List
 from datetime import datetime
 from box import ConfigBox
 from dotenv import find_dotenv, load_dotenv
-from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer, AutoModel, TrainingArguments
 
-from config.paths import DATA_PARAMS_FILE_PATH, MODEL_PARAMS_FILE_PATH
+from config.paths import DATA_PARAMS_FILE_PATH, MODEL_PARAMS_FILE_PATH, LOGS_DIR, INFERENCE_PARAMS_FILE_PATH
 from src.utils.file_management import FileManagement
 
 @dataclass 
@@ -46,6 +46,18 @@ class TrainingDataGenerationParams:
     prompt_template: str
 
 
+@dataclass
+class InferenceParams:
+    peft_model_id: str
+    model_id: str
+    model_template_name: str
+    model_max_new_tokens: int
+    model_temperature: float
+    setup_device: str
+    setup_debug: bool
+    dataset_filename: Path
+
+
 class ConfigurationManagement:
     @staticmethod
     def get_newsapi_api_key() -> str:
@@ -66,6 +78,21 @@ class ConfigurationManagement:
     def get_openai_api_key() -> str:
         _ = load_dotenv(find_dotenv())
         return os.environ["OPENAI_API_KEY"]
+    
+    @staticmethod
+    def get_comet_api_key() -> str:
+        _ = load_dotenv(find_dotenv())
+        return os.environ["COMET_API_KEY"]
+    
+    @staticmethod
+    def get_comet_workspace() -> str:
+        _ = load_dotenv(find_dotenv())
+        return os.environ["COMET_WORKSPACE"]
+    
+    @staticmethod
+    def get_comet_project_name() -> str:
+        _ = load_dotenv(find_dotenv())
+        return os.environ["COMET_PROJECT_NAME"]
 
     @staticmethod 
     def get_newsapi_request_params() -> NewsApiRequestParams:
@@ -135,6 +162,67 @@ class ConfigurationManagement:
         return training_data_generation_params
 
     @staticmethod
+    def get_training_arguments() -> TrainingArguments:
+        params = ConfigurationManagement.__read_model_params().training
+
+        training_arguments = TrainingArguments(
+            logging_dir=str(LOGS_DIR / "training_logs"),
+            per_device_train_batch_size=params["per_device_train_batch_size"],
+            gradient_accumulation_steps=params["gradient_accumulation_steps"],
+            per_device_eval_batch_size=params["per_device_eval_batch_size"],
+            eval_accumulation_steps=params["eval_accumulation_steps"],
+            optim=params["optim"],
+            save_steps=params["save_steps"],
+            logging_steps=params["logging_steps"],
+            learning_rate=params["learning_rate"],
+            fp16=params["fp16"],
+            max_grad_norm=params["max_grad_norm"],
+            num_train_epochs=params["num_train_epochs"],
+            warmup_ratio=params["warmup_ratio"],
+            lr_scheduler_type=params["lr_scheduler_type"],
+            evaluation_strategy=params["evaluation_strategy"],
+            eval_steps=params["eval_steps"],
+            report_to=params["report_to"],
+            seed=params["seed"],
+            load_best_model_at_end=params["load_best_model_at_end"],
+        )
+
+        return training_arguments
+    
+    @staticmethod
+    def get_model_params() -> ConfigBox:
+        params = ConfigurationManagement.__read_model_params().model
+
+        model_params = ConfigBox(
+            base_model_name=params.base_model_name,
+            template_name=params.template_name,
+            max_new_tokens=params.max_new_tokens,
+            temperature=params.temperature
+        )
+
+        return model_params
+
+    @staticmethod
+    def get_inference_params() -> ConfigBox:
+        peft_model = ConfigurationManagement.__read_inference_params().peft_model
+        model = ConfigurationManagement.__read_inference_params().model
+        setup = ConfigurationManagement.__read_inference_params().device
+        dataset = ConfigurationManagement.__read_inference_params().dataset
+
+        inference_params = InferenceParams(
+            peft_model_id=peft_model.id,
+            model_id=model.id,
+            model_template_name=model.template_name,
+            model_max_new_tokens=model.max_new_tokens,
+            model_temperature=model.temperature,
+            setup_device=setup.device,
+            setup_debug=setup.debug,
+            dataset_filename=dataset.filename
+        )
+
+        return inference_params
+
+    @staticmethod
     def __read_data_params() -> ConfigBox:
         params = FileManagement.read_yaml(Path(DATA_PARAMS_FILE_PATH))
         return params
@@ -144,3 +232,7 @@ class ConfigurationManagement:
         params = FileManagement.read_yaml(Path(MODEL_PARAMS_FILE_PATH))
         return params
     
+    @staticmethod
+    def __read_inference_params() -> ConfigBox:
+        params = FileManagement.read_yaml(Path(INFERENCE_PARAMS_FILE_PATH))
+        return params

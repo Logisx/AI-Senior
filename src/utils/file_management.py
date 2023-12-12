@@ -4,7 +4,6 @@ import yaml
 from pathlib import Path
 from box import ConfigBox
 from box.exceptions import BoxValueError
-from ensure import ensure_annotations
 from typing import List
 
 from src.utils.logging import logger
@@ -67,4 +66,21 @@ class FileManagement():
             raise ValueError(f"yaml file: {path_to_yaml} is empty")
         except Exception as e:
             raise e
+        
+    @staticmethod
+    def read_requirements(file_path) -> List[str]:
+        """
+        Reads a file containing a list of requirements and returns a list of stripped requirements.
+
+        Args:
+            file_path (str): The path to the file containing the requirements.
+
+        Returns:
+            list: A list of stripped requirements.
+        """
+
+        with open(file_path, "r") as file:
+            requirements = [line.strip() for line in file if line.strip()]
+
+        return requirements
     
