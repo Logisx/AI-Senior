@@ -4,15 +4,14 @@
 
 - [:page\_facing\_up: Table of Contents](#page_facing_up-table-of-contents)
 - [:rocket: Your personal Senior Assistant](#rocket-your-personal-senior-assistant)
-  - [:star: Features](#star-features)
-  - [:bar\_chart: Model choice](#bar_chart-model-choice)
   - [:toolbox: Tech Stack](#toolbox-tech-stack)
   - [:file\_folder: Project structure](#file_folder-project-structure)
   - [:computer: Run Locally](#computer-run-locally)
 - [:world\_map: Roadmap](#world_map-roadmap)
 - [⚖️ License](#️-license)
 - [🔗 Links](#-links)
-  - [Project Organization](#project-organization)
+- [📚 References \& Citations](#-references--citations)
+
 # :rocket: Your personal Senior Assistant
 
 Introducing AI Senior! <br> Your friendly AI companion offering experienced guidance for all your tech queries. From coding hiccups to tech dilemmas, AI Senior has your back. Simplify your tech journey with AI Senior by your side! 
