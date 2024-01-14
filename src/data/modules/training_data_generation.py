@@ -3,7 +3,7 @@ from tqdm import tqdm
 from typing import Dict
 
 from src.utils.logging import logger
-from config.paths import DATA_EXTERNAL_DIR, DATA_PROCESSED_DIR
+from config.paths import DATA_EXTERNAL_DIR, DATA_FINETUNING_DIR
 from src.utils.file_management import FileManagement
 from src.utils.configuration_management import ConfigurationManagement
 
@@ -33,10 +33,11 @@ class TrainingDataGenerator:
             output.append({**example, "response": response})
 
         logger.info("Saving training data to json")
-        FileManagement.save_to_json(DATA_PROCESSED_DIR / "training_data.json", output)
+        FileManagement.save_to_json(DATA_FINETUNING_DIR / "training_data.json", output)
 
     def __build_prompt(self, example: Dict) -> str:
         return self.__params.prompt_template.format(
             ABOUT_ME=example["about_me"],
             CONTEXT=example["context"],
+            QUESTION=example["question"],
         )

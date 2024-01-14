@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 from typing import Optional, Tuple
 
-import comet_llm
+#import comet_llm
 from datasets import Dataset
 from peft import PeftConfig
 from tqdm import tqdm
@@ -18,9 +18,10 @@ from src.utils.file_management import FileManagement
 from src.utils.configuration_management import ConfigurationManagement
 
 try:
-    comet_project_name = os.environ["COMET_PROJECT_NAME"]
-except KeyError:
-    raise RuntimeError("Please set the COMET_PROJECT_NAME environment variable.")
+    comet_project_name = ConfigurationManagement.get_comet_project_name()
+except Exception as e:
+    raise e
+#    raise RuntimeError("Please set the COMET_PROJECT_NAME environment variable.")
 
 logger = logging.getLogger(__name__)
 

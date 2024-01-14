@@ -1,0 +1,2 @@
+beam volume upload qa_dataset data.processed.fine-tuning
+BEAM_IGNORE_IMPORTS_OFF=true beam run ./src/models/train_run.py:train

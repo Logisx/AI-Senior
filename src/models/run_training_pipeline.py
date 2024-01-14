@@ -1,6 +1,4 @@
 import os
-import fire
-from pathlib import Path
 from beam import App, Image, Runtime, Volume, VolumeType
 
 
@@ -61,3 +59,7 @@ class TrainingApp:
         # Set to OFFLINE to run an Offline Experiment or DISABLE to turn off logging
         os.environ["COMET_MODE"] = "ONLINE"
         # Find out more about Comet ML configuration here: https://www.comet.com/docs/v2/integrations/ml-frameworks/huggingface/#configure-comet-for-hugging-face
+
+if __name__ == "__main__":
+    app = TrainingApp()
+    app.train()

@@ -62,37 +62,36 @@ class ConfigurationManagement:
     @staticmethod
     def get_newsapi_api_key() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["NEWSAPI_API_KEY"]
+        return os.getenv("NEWSAPI_API_KEY")
     
     @staticmethod
     def get_qdrant_api_key() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["QDRANT_API_KEY"]
+        return os.getenv("QDRANT_API_KEY")
     
     @staticmethod
     def get_qdrant_api_url() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["QDRANT_API_URL"]
+        return os.getenv("QDRANT_API_URL")
     
     @staticmethod
     def get_openai_api_key() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["OPENAI_API_KEY"]
+        return os.getenv("OPENAI_API_KEY")
     
     @staticmethod
     def get_comet_api_key() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["COMET_API_KEY"]
-    
+        return os.getenv("COMET_API_KEY")
     @staticmethod
     def get_comet_workspace() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["COMET_WORKSPACE"]
+        return os.getenv("COMET_WORKSPACE")
     
     @staticmethod
     def get_comet_project_name() -> str:
         _ = load_dotenv(find_dotenv())
-        return os.environ["COMET_PROJECT_NAME"]
+        return os.getenv("COMET_PROJECT_NAME")
 
     @staticmethod 
     def get_newsapi_request_params() -> NewsApiRequestParams:
@@ -166,7 +165,7 @@ class ConfigurationManagement:
         params = ConfigurationManagement.__read_model_params().training
 
         training_arguments = TrainingArguments(
-            logging_dir=str(LOGS_DIR / "training_logs"),
+            logging_dir=str(LOGS_DIR) + "/" + "training_logs",
             per_device_train_batch_size=params["per_device_train_batch_size"],
             gradient_accumulation_steps=params["gradient_accumulation_steps"],
             per_device_eval_batch_size=params["per_device_eval_batch_size"],
@@ -185,6 +184,7 @@ class ConfigurationManagement:
             report_to=params["report_to"],
             seed=params["seed"],
             load_best_model_at_end=params["load_best_model_at_end"],
+            output_dir=params["output_dir"],
         )
 
         return training_arguments
@@ -195,7 +195,7 @@ class ConfigurationManagement:
 
         model_params = ConfigBox(
             base_model_name=params.base_model_name,
-            template_name=params.template_name,
+            template_name=params.template,
             max_new_tokens=params.max_new_tokens,
             temperature=params.temperature
         )
@@ -206,7 +206,7 @@ class ConfigurationManagement:
     def get_inference_params() -> ConfigBox:
         peft_model = ConfigurationManagement.__read_inference_params().peft_model
         model = ConfigurationManagement.__read_inference_params().model
-        setup = ConfigurationManagement.__read_inference_params().device
+        setup = ConfigurationManagement.__read_inference_params().setup
         dataset = ConfigurationManagement.__read_inference_params().dataset
 
         inference_params = InferenceParams(

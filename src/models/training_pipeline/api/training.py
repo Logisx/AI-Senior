@@ -15,8 +15,8 @@ from transformers import (
 )
 from trl import SFTTrainer
 
-from training_pipeline.data import qa
-from training_pipeline import constants, metrics, models
+from src.models.training_pipeline.data import qa
+from src.models.training_pipeline import constants, metrics, models
 
 from src.utils.logging import logger
 from src.utils.configuration_management import ConfigurationManagement

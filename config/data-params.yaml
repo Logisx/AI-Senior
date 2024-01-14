@@ -11,13 +11,16 @@ training_data_generation:
   temperature: 0
   max_tokens: 100
   prompt_template: |
-    You are an expert in the IT development and edge technologies. I will give you some information about myself and you will provide me with a development advice.
+    You are an expert in the IT development and edge technologies. I will give you some information about myself and answer a question and you will provide me with a development advice.
 
     # ABOUT ME
     {ABOUT_ME}
 
     # CONTEXT
     {CONTEXT}
+
+    # QUESTION
+    {QUESTION}
 
     Please provide concrete advice in less than 100 tokens, and justify your answer based on the news provided in the context.
 
@@ -29,8 +32,8 @@ newsapi_request:
 
 news_download:
   num_requests: 150
-  from_date: 2023-11-04
-  to_date: 2023-12-11
+  from_date: 2023-11-06
+  to_date: 2023-12-13
   queries_list: [
     '+Artificial Intelligence',
     '+Machine Learning',

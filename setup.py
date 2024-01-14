@@ -1,10 +1,7 @@
-from setuptools import find_packages, setup
+from setuptools import setup, find_packages
 
 setup(
-    name='src',
+    name='LLMOps_tech_lead_bot',
+    version='0.0.0',
     packages=find_packages(),
-    version='0.1.0',
-    description='A short description of the project.',
-    author='Aleksanhishkov',
-    license='MIT',
 )
