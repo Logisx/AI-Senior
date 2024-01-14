@@ -1,8 +1,8 @@
 ![Logo](https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/assets/logo-color_cropped.png?raw=true)
 
-# :page_facing_up: Table of Contents 
+# 📋 Table of Contents 
 
-- [:page\_facing\_up: Table of Contents](#page_facing_up-table-of-contents)
+- [📋 Table of Contents](#-table-of-contents)
 - [:rocket: Your personal Senior Assistant](#rocket-your-personal-senior-assistant)
   - [:toolbox: Tech Stack](#toolbox-tech-stack)
   - [:file\_folder: Project structure](#file_folder-project-structure)
