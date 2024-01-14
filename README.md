@@ -3,7 +3,7 @@
 # :page_facing_up: Table of Contents 
 
 - [:page\_facing\_up: Table of Contents](#page_facing_up-table-of-contents)
-- [:rocket: Grade your IELTS essay with BERT](#rocket-grade-your-ielts-essay-with-bert)
+- [:rocket: Your personal Senior Assistant](#rocket-your-personal-senior-assistant)
   - [:star: Features](#star-features)
   - [:bar\_chart: Model choice](#bar_chart-model-choice)
   - [:toolbox: Tech Stack](#toolbox-tech-stack)
@@ -13,11 +13,12 @@
 - [⚖️ License](#️-license)
 - [🔗 Links](#-links)
   - [Project Organization](#project-organization)
-# :rocket: Grade your IELTS essay with BERT
+# :rocket: Your personal Senior Assistant
 
-Welcome to the [IELTS Essay Grading Web Application](https://ielts-grading.azurewebsites.net/)! This web app is designed to provide users with a convenient and efficient way to have their IELTS essays assessed and receive a predicted score using a Machine Learning model.
+Introducing AI Senior! Your friendly AI companion offering experienced guidance for all your tech queries. From coding hiccups to tech dilemmas, AI Senior has your back. Simplify your tech journey with AI Senior by your side!
 
-![Version](https://img.shields.io/badge/Version-1.0-blue.svg)
+
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) \
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.3-green)
