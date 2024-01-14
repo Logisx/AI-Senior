@@ -1,4 +1,4 @@
-![Logo](https://github.com/Logisx/AI_Senior/blob/main/assets/logo-color_cropped.png?raw=true)
+![Logo](https://github.com/Logisx/AI-Senior/blob/main/assets/logo-color_cropped.png?raw=true)
 
 # 📋 Table of Contents 
 
@@ -38,7 +38,7 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 
 
 <p>
-  <img src="https://github.com/Logisx/AI_Senior/blob/main/assets/architecture.png?raw=true" alt="Architecture">
+  <img src="https://github.com/Logisx/AI-Senior/blob/main/assets/architecture.png?raw=true" alt="Architecture">
 </p>
 
 ## :toolbox: Tech Stack
@@ -212,7 +212,7 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 
 
 # ⚖️ License
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Logisx/AI_Senior/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Logisx/AI-Senior/blob/main/LICENSE)
 
 
 # 🔗 Links
