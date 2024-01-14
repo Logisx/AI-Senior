@@ -37,8 +37,8 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 
 
 
-<p align="left">
-  <img src="https://github.com/Logisx/AI_Senior/blob/main/assets/architecture.png?raw=true" alt="Architecture" width="800" height="800">
+<p>
+  <img src="https://github.com/Logisx/AI_Senior/blob/main/assets/architecture.png?raw=true" alt="Architecture">
 </p>
 
 ## :toolbox: Tech Stack
