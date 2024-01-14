@@ -1,4 +1,4 @@
-![Logo](https://github.com/Logisx/IELTS-Grading/blob/main/assets/deepessay-high-resolution-color-logo.png?raw=true)
+![Logo](https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/assets/logo-color_cropped.png?raw=true)
 
 # :page_facing_up: Table of Contents 
 
@@ -15,99 +15,183 @@
   - [Project Organization](#project-organization)
 # :rocket: Your personal Senior Assistant
 
-Introducing AI Senior! Your friendly AI companion offering experienced guidance for all your tech queries. From coding hiccups to tech dilemmas, AI Senior has your back. Simplify your tech journey with AI Senior by your side!
+Introducing AI Senior! <br> Your friendly AI companion offering experienced guidance for all your tech queries. From coding hiccups to tech dilemmas, AI Senior has your back. Simplify your tech journey with AI Senior by your side! 
 
+*Work is in progress...* 🏗️
 
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) \
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![Flask](https://img.shields.io/badge/Flask-2.3-green)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.14-orange)
-![BERT](https://img.shields.io/badge/BERT-NLP-ff6600)
-![Docker](https://img.shields.io/badge/Docker-24.0-blue)
-![Microsoft Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud-0089D6)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.1.1-red)
+![JupyterLab](https://img.shields.io/badge/Jupyter%20Lab-Research-FF9900)
+![Bytewax](https://img.shields.io/badge/Bytewax-Dataflow-FF9900)
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
+![Qdrant](https://img.shields.io/badge/Qdrant-VectorDB-purple) 
+![LLMs](https://img.shields.io/badge/LLMs-Model-663399)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-NLP-5b68d6)
+![Comet](https://img.shields.io/badge/Comet-Tracking-ff6600)
+![Beam](https://img.shields.io/badge/Beam-Training-blue)
+![LangChain](https://img.shields.io/badge/LangChain-ChatBot-ee4d5f)
 ![REST](https://img.shields.io/badge/REST-API-5b68d6)
+![Gradio](https://img.shields.io/badge/Gradio-UI-009688) 
+![Docker](https://img.shields.io/badge/Docker-Containers-blue)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-Workflow-4D7A97)
+![Terraform](https://img.shields.io/badge/Terraform-Infrastructure-623CE4)
 
 
-![Demo](https://github.com/Logisx/IELTS-Grading/blob/main/assets/Demo.gif?raw=true)
 
-
-## :star: Features
-- **Submit Essays**: Users can submit their IELTS essays directly through the web application. The process is user-friendly and straightforward.
-
-- **Machine Learning Essay Grading**: The heart of this application is a finely-tuned BERT (Bidirectional Encoder Representations from Transformers) model. This model analyzes and assesses the submitted essays, considering a variety of linguistic and structural aspects.
-
-- **Predicted Score**: After processing the essay, the application provides users with a predicted IELTS score. This score is an estimate of how the essay might be rated in the actual IELTS exam, helping users gauge their writing proficiency.
-
-- **Warning functionality**: The application includes a warning feature that checks the submitted text. It will display a warning if the essay is too short or if the text does not meet the minimum requirements. This ensures that users are provided with guidance on submitting valid essays.
-<img src="https://github.com/Logisx/IELTS-Grading/blob/main/assets/Warnings_demo.gif?raw=true" width="400" alt="Warnings demo">
-
-## :bar_chart: Model choice
-**Detailed training overview with EDA and Feature engineering** can be found in the [notebook](https://github.com/Logisx/IELTS-Grading/blob/main/IELTS_Grading_with_BERT.ipynb).\
-**Dataset**: [IELTS Writing Scored Essays Dataset
-](https://www.kaggle.com/datasets/mazlumi/ielts-writing-scored-essays-dataset)
-
-After analysing different approaches I decided to continue with 3 models:
-1. **BERT fine-tuned for a regression task**
-2. **BERT output concatenated with numerical features**
-3. **BERT output concatenated with numerical and binary features**
-  
-The model structures and corresponding Mean Absolute Error (MAE) metrics are shown in the figures below:
-![Models structure](https://github.com/Logisx/IELTS-Grading/blob/main/assets/Model_structure_white.png?raw=true)
-<img src="https://github.com/Logisx/IELTS-Grading/blob/main/assets/models_mae.png?raw=true" width="400" alt="Models MAE"> 
-
-Although more complex models produce better results, after testing, it was decided to use a text model for lower latency.
-
+<p align="left">
+  <img src="https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/assets/architecture.png?raw=true" alt="Architecture" width="800" height="800">
+</p>
 
 ## :toolbox: Tech Stack
 
-- **Framework**: Flask
-- **NLP**: TensorFlow, BERT, Hugging Face Transformers, Sklearn
-- **Deployment**: Docker, Microsoft Azure
-- **Frontend**: HTML, CSS, JavaScript
-- **Version Control**: Git, GitHub
-- **Testing**: REST client
+- **ML**: Python, PyTorch, JupyterLab
+- **Data Services**: Bytewax, AWS, Qdrant
+- **Training**: LLMs, HuggingFace, Comet, Beam
+- **ChatBot & UI**: LangChain, REST-API, Gradio
+- **Deployment**: Docker, Terraform
+
 
 ## :file_folder: Project structure
+🚧 **Work in progress** 🚧
 ```
-+---app
-|   |   main.py
-|   |   text_validation.py
-|   |   __init__.py
-|   |
-|   +---ML
-|   |   |   pipeline.py
-|   |   |   __init__.py
-|   |   |
-|   |   \---models
-|   |       +---training_bert_num
-|   |       |
-|   |       +---training_bert_num_bin
-|   |       |
-|   |       \---training_bert_text
+|   .beamignore
+|   .env
+|   .gitignore                  <- Specify files to be ignored by git
+|   LICENSE                     <- Project license
+|   Makefile                    <- Makefile with commands like `make data` or `make train`
+|   README.md                   <- The top-level README for developers using this project.
+|   requirements.txt            <- The requirements file for reproducing the analysis environment, e.g. generated with `pip freeze > requirements.txt`
+|   setup.py                    <- Make this project pip installable with `pip install -e`
+|   test_environment.py
+|   tox.ini
+|   .venv
+|                   
++---assets                       <- Store public assets for readme file
+|   |   architecture.png
+|   \---logo-color_cropped.png
+|               
++---config                       <- Stores pipelines' configuration files
+|       data-params.yaml
+|       inference-params.yaml
+|       model-params.yaml
+|       paths.py
+|       
++---data
+|   |   .gitkeep
 |   |   
-|   +---static
-|   |
-|   \---templates
-|         index.html
-|         warning.html
-|   
-+---assets
-|
-|   .gitignore
-|   Dockerfile
-|   IELTS_Grading_with_BERT.ipynb
-|   LICENSE
-|   README.md
-\   requirements.txt
+|   +---external                 <- Data from third party sources.
+|   |       .gitkeep
+|   |       
+|   +---interim                  <- Intermediate data that has been transformed.
+|   |       .gitkeep
+|   |       
+|   +---processed                <- The final, canonical data sets for modeling.
+|   |   |   .gitkeep
+|   |   |   documents_newsapi_news.json
+|   |   |   
+|   |   \---fine-tuning
+|   |           testing_data.json
+|   |           training_data.json
+|   |           
+|   \---raw                      <- The original, immutable data dump.
+|           .gitkeep
+|           
++---docs
+|       commands.rst
+|       conf.py
+|       getting-started.rst
+|       index.rst
+|       make.bat
+|       Makefile
+|       
++---logs
+|       .gitkeep
+|       running_logs.log
+|       
++---models                      <- Trained and serialized models, model predictions, or model summaries
+|   |   .gitkeep
+|   |   
+|   \---cache
+|           .gitkeep
+|           
++---notebooks                   <- Jupyter notebooks for research.
+|       .gitkeep
+|       research-01-data-api-usage.ipynb
+|       
++---references
+|       .gitkeep
+|       
++---reports
+|   |   .gitkeep
+|   |   
+|   \---figures
+|           .gitkeep
+|           
++---src                          <- Source code for use in this project.
+|   |   __init__.py             <- Makes src a Python module
+|   |   
+|   +---data                    <- Scripts to download or generate data
+|   |   |   .gitkeep
+|   |   |   generate_training_data.py
+|   |   |   run_data_pipeline.py
+|   |   |   __init__.py
+|   |   |   
+|   |   +---modules
+|   |   |       data_preprocessor.py
+|   |   |       newsapi_data_loader.py
+|   |   |       qdrant_data_uploader.py
+|   |   |       training_data_generation.py
+|   |   |       __init__.py
+|   |   |       
+|   |   \---pipeline
+|   |           data_download.py
+|   |           data_preprocessing.py
+|   |           data_upload.py
+|   |           
+|   +---models                  <- Scripts to train models and then use trained models to make predictions
+|   |   |   .gitkeep
+|   |   |   requirements.txt
+|   |   |   run_inference_pipeline.py
+|   |   |   run_training_pipeline.py
+|   |   |   steps.txt
+|   |   |   train_run.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---training_pipeline
+|   |       |   constants.py
+|   |       |   metrics.py
+|   |       |   models.py
+|   |       |   __init__.py
+|   |       |   
+|   |       +---api
+|   |       |       inference.py
+|   |       |       training.py
+|   |       |       __init__.py
+|   |       |       
+|   |       +---data
+|   |       |       qa.py
+|   |       |       __init__.py
+|   |       |       
+|   |       \---prompt_templates
+|   |               prompter.py
+|   |               
+|   \---utils                  <- Utility functions and classes
+|       |   computation_management.py
+|       |   configuration_management.py
+|       |   file_management.py
+|       |   __init__.py
+|       |   
+|       \---logging
+|               __init__.py
+|               
+\---src.egg-info
 ```
-
 ## :computer: Run Locally
 
 1. Clone the project
 
 ```bash
-  git clone https://github.com/Logisx/IELTS-Grading.git
+  git clone https://github.com/Logisx/LLMOps_tech_lead_bot.git
 ```
 
 2. Go to the project directory
@@ -121,78 +205,21 @@ Although more complex models produce better results, after testing, it was decid
 ```bash
   pip install -r requirements.txt
 ```
-
-4. Train a model in a notebook and save the weights to:
-```bash
-  ./app/ML/models/training_bert_text
-```
-5. Start the server
-
-```bash
-  python app/main.py
-```
+🚧 **Work in progress** 🚧
 
 # :world_map: Roadmap
 
-1. **Testing features**: Develop unit tests and integrations test.
-2. **Data collection**: Aggregate more data to improve accuracy.
-3. **Educational insights feature**: Along with the score, the application will offer insights and suggestions for improvement, making it a valuable educational tool for those looking to enhance their writing skills.
+🚧 **Work in progress** 🚧
 
 
 # ⚖️ License
-
-[MIT](https://github.com/Logisx/DeepEssay/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/LICENSE)
 
 
 # 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aleksandrshishkov)
 
+# 📚 References & Citations
+Inspired by awesome [Hands-on LLMs Course](https://github.com/iusztinpaul/hands-on-llms) made by <a href="https://github.com/iusztinpaul">Paul Iusztin</a>, <a href="https://github.com/Paulescu">Pau Labarta Bajo</a> and <a href="https://github.com/Joywalker">Alexandru Razvant</a>
 
-
-Project Organization
-------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+Check it out!
