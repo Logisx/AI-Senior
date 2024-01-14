@@ -1,4 +1,4 @@
-![Logo](https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/assets/logo-color_cropped.png?raw=true)
+![Logo](https://github.com/Logisx/AI_Senior/blob/main/assets/logo-color_cropped.png?raw=true)
 
 # 📋 Table of Contents 
 
@@ -38,7 +38,7 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 
 
 <p align="left">
-  <img src="https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/assets/architecture.png?raw=true" alt="Architecture" width="800" height="800">
+  <img src="https://github.com/Logisx/AI_Senior/blob/main/assets/architecture.png?raw=true" alt="Architecture" width="800" height="800">
 </p>
 
 ## :toolbox: Tech Stack
@@ -190,7 +190,7 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 1. Clone the project
 
 ```bash
-  git clone https://github.com/Logisx/LLMOps_tech_lead_bot.git
+  git clone https://github.com/Logisx/AI_Senior.git
 ```
 
 2. Go to the project directory
@@ -212,7 +212,7 @@ Introducing AI Senior! <br> Your friendly AI companion offering experienced guid
 
 
 # ⚖️ License
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Logisx/LLMOps_tech_lead_bot/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Logisx/AI_Senior/blob/main/LICENSE)
 
 
 # 🔗 Links
